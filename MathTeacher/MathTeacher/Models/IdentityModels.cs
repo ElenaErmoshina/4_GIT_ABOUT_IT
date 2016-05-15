@@ -29,5 +29,6 @@ namespace MathTeacher.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

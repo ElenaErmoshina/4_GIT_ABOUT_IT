@@ -12,7 +12,7 @@ namespace MathTeacher.DAL
     public class GameContext : DbContext
     {
 
-        public GameContext(): base("GameContext")
+        public GameContext(): base("GameDb")
         {
             Database.SetInitializer<GameContext>(null);
         }
@@ -24,8 +24,13 @@ namespace MathTeacher.DAL
         public DbSet<Game> Games { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-        modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+
+        public static GameContext Create()
+        {
+            return new GameContext();
+        }
     }
-}
 }

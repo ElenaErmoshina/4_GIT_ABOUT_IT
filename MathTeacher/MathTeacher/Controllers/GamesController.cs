@@ -40,7 +40,7 @@ namespace MathTeacher.Controllers
         public ActionResult Start()
         {
 
-            var questions = db.Questions.OrderBy(qu => Guid.NewGuid()).Take(10);
+            var questions = db.Questions.OrderBy(qu => Guid.NewGuid()).Take(10).ToList();
             var game = new Game()
             {
                 UserName = System.Web.HttpContext.Current.User.Identity.Name,
@@ -57,11 +57,14 @@ namespace MathTeacher.Controllers
                     EndTIme = DateTime.Now,
                     Order = answerOrder
                 };
+
                 var createdAnswer = db.Answers.Add(answer);
+
                 question.Answers.Add(createdAnswer);
                 createdGame.Answers.Add(createdAnswer);
 
                 answerOrder++;
+
             }
 
             db.SaveChanges();
